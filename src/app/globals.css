@@ -1,26 +1,88 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
+@theme {
+  /* Fonts */
+  --font-sans: 'DM Sans', sans-serif;
+  --font-display: 'Playfair Display', serif;
+
+  /* Brand colors */
+  --color-teal: #2a7f8a;
+  --color-teal-mid: #3a9daa;
+  --color-teal-lt: #b8dde2;
+  --color-teal-pale: #e4f2f4;
+  --color-teal-dark: #1a5f6a;
+  --color-accent: #1d6b75;
+  --color-navy: #1a2f3d;
+
+  /* Text */
+  --color-ink: #0d1f2d;
+  --color-ink2: #3d5a6c;
+  --color-ink3: #4a6a7a;
+  --color-muted: #607d8e;
+
+  /* Backgrounds & surfaces */
+  --color-bg: #f7f9fb;
+  --color-bg2: #eef3f7;
+  --color-surface: #ffffff;
+  --color-border: #dce8ee;
+  --color-dark-bg: #0d1f2d;
+
+  /* Radius & transition */
+  --radius: 2px;
+  --trans: 0.25s ease;
+
+  /* Spacing */
+  --spacing-xs: 8px;
+  --spacing-sm: 16px;
+  --spacing-md: 24px;
+  --spacing-lg: 40px;
+  --spacing-xl: 64px;
+  --spacing-2xl: 80px;
+  --page-pad: 40px;
 }
 
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+[data-theme="dark"] {
+  --color-bg: #0a1820;
+  --color-bg2: #0f2030;
+  --color-surface: #132535;
+  --color-border: #1e3a4a;
+  --color-ink: #edf2f5;
+  --color-ink2: #b8c8d0;
+  --color-muted: #5a7a88;
+  --color-teal: #2e9aaa;
+  --color-teal-mid: #3ab0c0;
+  --color-teal-lt: #1a4a56;
+  --color-teal-pale: #102030;
+  --color-accent: #2e9aaa;
+  --color-dark-bg: #040e14;
 }
 
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
+html {
+  scroll-behavior: smooth;
 }
 
 body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+  background: var(--color-bg);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  font-size: 16px;
+  letter-spacing: 0.02em;
+  line-height: 1.6;
+  -webkit-font-smoothing: antialiased;
+  transition: background var(--trans), color var(--trans);
+}
+
+::-webkit-scrollbar { width: 4px; }
+::-webkit-scrollbar-thumb { background: var(--color-teal-lt); }
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+.skeleton {
+  background: linear-gradient(90deg, var(--color-bg2) 25%, var(--color-bg) 50%, var(--color-bg2) 75%);
+  background-size: 200% 100%;
+  animation: shimmer 1.5s ease-in-out infinite;
+  border-radius: var(--radius);
 }
