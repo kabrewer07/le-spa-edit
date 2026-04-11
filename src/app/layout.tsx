@@ -1,5 +1,6 @@
 import type { Metadata } from 'next'
 import { Playfair_Display, DM_Sans } from 'next/font/google'
+import Nav from '@/components/layout/Nav'
 import './globals.css'
 
 const playfair = Playfair_Display({
@@ -26,9 +27,25 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
+    // data-theme="dark"
     <html lang="en" className={`${playfair.variable} ${dmSans.variable}`}>
+      <head>
+      <script dangerouslySetInnerHTML={{ __html: `
+        (function() {
+          try {
+            var saved = localStorage.getItem('theme');
+            var prefersDark = window.matchMedia('(prefers-color-scheme: dark)').matches;
+            var isDark = saved ? saved === 'dark' : prefersDark;
+            document.documentElement.setAttribute('data-theme', isDark ? 'dark' : 'light');
+          } catch(e) {}
+        })();
+      `}} />
+      </head>
       <body className="min-h-full flex flex-col antialiased">
-        {children}
+        <Nav />
+        <main id="main-content">
+          {children}
+        </main>
       </body>
     </html>
   )
