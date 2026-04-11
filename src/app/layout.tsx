@@ -1,6 +1,7 @@
 import type { Metadata } from 'next'
 import { Playfair_Display, DM_Sans } from 'next/font/google'
 import Nav from '@/components/layout/Nav'
+import { Footer } from '@/components/layout/Footer'
 import './globals.css'
 
 const playfair = Playfair_Display({
@@ -27,9 +28,9 @@ export default function RootLayout({
   children: React.ReactNode
 }>) {
   return (
-    // data-theme="dark"
     <html lang="en" className={`${playfair.variable} ${dmSans.variable}`}>
       <head>
+      {/* Dark/Light Theme Logic */}
       <script dangerouslySetInnerHTML={{ __html: `
         (function() {
           try {
@@ -46,6 +47,7 @@ export default function RootLayout({
         <main id="main-content">
           {children}
         </main>
+        <Footer />
       </body>
     </html>
   )
